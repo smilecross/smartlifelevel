@@ -10,14 +10,16 @@
 
   - イメージは”mgram”のようなアプリ
 
+  - ディプロイしているサイト（https://sub.life-money-tech.com/index.html）を再構築
+
 ## 工夫した点
 
   - めっちゃ書こう
 
 ## 苦戦した点
 
-  - データテーブル設計に苦悩
+  - データテーブル設計に苦悩中
 
 ## 参考にした web サイトなど
 
-  - 後で見返せるように
+  - https://www.youtube.com/playlist?list=PL-1KBX2gDRujQaRgEByueezHBiqHP8KDD
