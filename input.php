@@ -43,10 +43,46 @@
         <p>SNSやニュースを見る以外に生活にいかせているか</p>
         <p>ちょっと試してみませんか？</p>
     </span>
+    
     <div class='s_btn_box'>
         <!--要件１：'診断をはじめる'が表示されている。設問は非表示 -->
         <button id='s_btn'>診断をはじめる</button>
     </div>
+
+    <!-- ここからphp -->
+    <form action="create.php" method="POST">
+    <fieldset>
+      <div>
+        お名前（ニックネーム）: <input type="text" name="username">
+      </div>
+      <div>
+        <button>submit</button>
+      </div>
+    </fieldset>
+    </form>
+    <!-- 居住地 -->
+    居住地は？
+    <form action="add_residence.php" method="post">
+    <label>
+      <input type="radio" name="choice" value="fukuoka" checked> 福岡市在住
+    </label>
+    <label>
+      <input type="radio" name="choice" value="not_fukuoka"> 福岡市以外
+    </label>
+    <button type="submit">次へ</button>
+    </form>
+
+    <!-- 子どもの有無 -->
+    15歳以下の子どもは？
+    <form action="add_children.php" method="post">
+    <label>
+      <input type="radio" name="choice" value="under15" checked> いる
+    </label>
+    <label>
+      <input type="radio" name="choice" value="no"> いない
+    </label>
+    <button type="submit">次へ</button>
+    </form>
 
     <!-- 質問項目と回答はjsで -->
     <h2></h2>
