@@ -22,6 +22,10 @@
 
   - JavaScriptで作成する場合とphpで作成する場合で表現方法を変更した方が良いのか迷走中
 
+  - Laravelを試みるも断念。
+
+  - Teilwind cssを採用。css苦戦組としてはとても重宝しています。
+
 ## 参考にした web サイトなど
 
   - https://www.youtube.com/playlist?list=PL-1KBX2gDRujQaRgEByueezHBiqHP8KDD
