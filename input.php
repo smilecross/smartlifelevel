@@ -1,3 +1,22 @@
+<?php
+session_start();
+?>
+
+<section class="m-5 text-center" >
+<form action="home1.php" method="POST">
+    <fieldset>
+        <div class="text-center">
+            お名前（ニックネーム）<br>
+             <input type="text" name="username" class="rounded border bg-gray-50 p-3">
+        </div>
+        <br>
+        <div class="text-center bg-yellow-500 hover:bg-blue-500 w-1/4 mx-auto rounded-full">
+            <input type="submit" value="スタート">
+        </div>
+    </fieldset>
+</form>
+</section>
+
 <!DOCTYPE html>
 <html lang="ja" prefix="og: http://ogp.me/ns#">
 
@@ -11,11 +30,10 @@
     <meta property="og:type" content="Web">
     <meta property="og:image" content="img/smartlifecheck.png">
     <title>Document</title>
-
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script type="module">
-        import "./firebase.js";
-    </script>
+    <script src="https://cdn.tailwindcss.com" rel="stylesheet"></script>
+    <link rel="stylesheet" href="style.css">
+    <!-- <script src="main.js" type="text/javascript"></script> -->
+    
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
     <!-- Google tag (gtag.js) -->
@@ -29,10 +47,10 @@
     </script>
 </head>
 
-<body>
-
-    <h1>スマートライフ診断 α版</h1>
-    <span class="message" style="text-align: center;">
+<body class="md:flex h-full font-mono">
+     <h1 class="h-1/5 m-10 text-center text-2xl font-extrabold">スマートライフ診断</h1>
+    <section class="text-center m-10">
+        <span class="text-center">
         <p>なくてはならないスマートフォン</p>
         <p>当たり前に使ってはいるけれど</p>
         <br>
@@ -42,59 +60,33 @@
         <p>と思うことはありませんか？</p>
         <p>SNSやニュースを見る以外に生活にいかせているか</p>
         <p>ちょっと試してみませんか？</p>
-    </span>
+        </span>
+    </section>
     
-    <div class='s_btn_box'>
-        <!--要件１：'診断をはじめる'が表示されている。設問は非表示 -->
-        <button id='s_btn'>診断をはじめる</button>
-    </div>
 
-    <!-- ここからphp -->
-    <form action="create.php" method="POST">
-    <fieldset>
-      <div>
-        お名前（ニックネーム）: <input type="text" name="username">
-      </div>
-      <div>
-        <button>submit</button>
-      </div>
-    </fieldset>
-    </form>
-    <!-- 居住地 -->
-    居住地は？
-    <form action="add_residence.php" method="post">
-    <label>
-      <input type="radio" name="choice" value="fukuoka" checked> 福岡市在住
-    </label>
-    <label>
-      <input type="radio" name="choice" value="not_fukuoka"> 福岡市以外
-    </label>
-    <button type="submit">次へ</button>
-    </form>
-
-    <!-- 子どもの有無 -->
-    15歳以下の子どもは？
-    <form action="add_children.php" method="post">
-    <label>
-      <input type="radio" name="choice" value="under15" checked> いる
-    </label>
-    <label>
-      <input type="radio" name="choice" value="no"> いない
-    </label>
-    <button type="submit">次へ</button>
-    </form>
-
-    <!-- 質問項目と回答はjsで -->
-    <h2></h2>
-    <ul></ul>
-
-
+    
     <!-- スマートライフ診断：非表示、最後に表示 -->
-    <div class='point'>あなたのスマートライフレベルは：<span data-point-num ></span>です。</div>
-
+    <section class="h-10 text-center m-10 <?php if(!isset($_POST['username'])) { echo 'hidden'; } ?>">
+    <h1 class="text-2xl font-extrabold " id='point'>あなたのスマートライフレベルは：<span data-point-num ></span>です。</h1>
+    </section>
 
     <!-- レベルごとのボタン 非表示から最後に表示-->
-    <div class="m-open-box">
+    <div class="text-center m-16 <?php if(!isset($_POST['username'])) { echo 'hidden'; } ?>" x-data="{ isOpen: false }">
+        <!-- モーダルウィンドウのトリガー -->
+        <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded" @click="isOpen = true">診断結果</button>
+
+        <!-- モーダルウィンドウのコンテンツ -->
+        <!-- <div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50" x-show="isOpen">
+            <div class="bg-white p-4 rounded shadow">
+            モーダルウィンドウのコンテンツ
+            <h2 class="text-xl mb-4">モーダルウィンドウ</h2>
+            <p>モーダルウィンドウのコンテンツがここに入ります。</p>
+            <button type="button" class="bg-red-500 text-white px-4 py-2 rounded mt-4" @click="isOpen = false">閉じる</button>
+            </div>
+        </div> 
+    </div> -->
+
+    <div class="text-center hidden" id="m-open-box">
         <button id="level5" class="modal-open" data-modal="modalFive">診断結果</button>
         <button id="level4" class="modal-open" data-modal="modalFour">診断結果</button>
         <button id="level3" class="modal-open" data-modal="modalThree">診断結果</button>
@@ -108,7 +100,7 @@
     <!-- </div> -->
 
     <!--要件１：SNSボタンは非表示からの最後に表示 -->
-    <div class="wrapper" style="display: none;">
+    <div class="flex" >
         <div class='r_btn_box'>
             <a href="http://www.facebook.com/share.php?u={URL}" rel="nofollow noopener" target="_blank"><img
                     src="img/fb-black.png" alt=""></a>
@@ -119,7 +111,15 @@
         </div>
     </div>
     <!-- modalFive -->
-    <div id="modalFive" class="modal-container">
+    <!-- <div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50" x-show="isOpen">
+    <div class="bg-white p-4 rounded shadow"> -->
+    <!-- モーダルウィンドウのコンテンツ -->
+    <!-- <h2 class="text-xl mb-4">モーダルウィンドウ</h2>
+    <p>モーダルウィンドウのコンテンツがここに入ります。</p>
+    <button type="button" class="bg-red-500 text-white px-4 py-2 rounded mt-4" @click="isOpen = false">閉じる</button>
+    </div>
+    </div> -->
+    <div id="modalFive" class="hidden">
         <div class="modal-body">
             <div class="modal-close">×</div>
             <div class="modal-content">
@@ -142,7 +142,7 @@
     </div>
     <!-- modalFive -->
     <!-- modalFour -->
-    <div id="modalFour" class="modal-container">
+    <div id="modalFour" class="hidden">
         <div class="modal-body">
             <div class="modal-close">×</div>
             <div class="modal-content">
@@ -165,7 +165,7 @@
     </div>
     <!-- modalFour -->
     <!-- modalThree -->
-    <div id="modalThree" class="modal-container">
+    <div id="modalThree" class="hidden">
         <div class="modal-body">
             <div class="modal-close">×</div>
             <div class="modal-content">
@@ -188,7 +188,7 @@
     </div>
     <!-- modalThree -->
     <!-- modalTwo -->
-    <div id="modalTwo" class="modal-container">
+    <div id="modalTwo" class="hidden">
         <div class="modal-body">
             <div class="modal-close">×</div>
             <div class="modal-content">
@@ -210,7 +210,7 @@
     </div>
     <!-- modalTwo -->
     <!-- modalOne -->
-    <div id="modalOne" class="modal-container">
+    <div id="modalOne" class="hidden">
         <div class="modal-body">
             <div class="modal-close">×</div>
             <div class="modal-content">
@@ -231,31 +231,12 @@
         </div>
     </div>
     <!-- modalOne -->
-
     <!-- footer -->
-    <footer>
-        <div class="f-fukuoka">
-            <img src="img/fukuoka1.png" alt="">
+    <footer class="text-center">
+        <div>
+            <img src="img/fukuoka1.png" alt="" class="inline">
         </div>
-        <p id="copy">©️2023 CROSSHERT All Rights Reserved. </p>
+        <p>©️2023 CROSSHERT All Rights Reserved. </p>
     </footer>
-
-    <script src="main.js" type="text/javascript"></script>
 </body>
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyCdrBKHvAaI6i7tbUk5ZC1_l6llNuujQSg",
-        authDomain: "smartlifecheck-d8100.firebaseapp.com",
-        projectId: "smartlifecheck-d8100",
-        storageBucket: "smartlifecheck-d8100.appspot.com",
-        messagingSenderId: "246749471005",
-        appId: "1:246749471005:web:7212e6f9c54da989dac1f4"
-    };
-
-    const app = initializeApp(firebaseConfig);
-</script>
-
 </html>

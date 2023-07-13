@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- カテゴリー基本ー -->
+    居住地は？
+    <form action="add_residence.php" method="post">
+        <label>
+            <input type="radio" name="choice" value="fukuoka" checked> 福岡市在住
+        </label>
+        <label>
+            <input type="radio" name="choice" value="not_fukuoka"> 福岡市以外
+        </label>
+        <button type="submit">次へ</button>
+    </form>
+</body>
+</html>
