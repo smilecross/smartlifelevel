@@ -17,11 +17,21 @@
 <body class="md:flex mt-16 h-full font-mono">
 
     <section class="bg-emerald-100 text-gray-800 flex flex-col w-4/5 mx-auto px-4 py-2 rounded-lg">
-        <form id="questionsForm">
-            <input type="hidden" name="userAnswers">
+        <form id="questionsForm" action="score_process.php" method="post">
+            <input type="hidden" id="userAnswersInput" name="userAnswers">
             <h2 class="text-lg text-center m-5"> </h2>
             <ul id="questionList" class="text-left text-lg  mt-8 mb-8 space-y-10">
             </ul>
+            <div class="flex">
+                <button id="goBackButton" type="button"
+                    class="text-center bg-emerald-100 hover:bg-blue-500 w-1/6 mx-auto px-4 py-2 rounded-full">
+                    戻る
+                </button>
+                <button id="submitButton" type="submit"
+                    class="text-center bg-emerald-100 hover:bg-blue-500 w-1/6 mx-auto px-4 py-2 rounded-full">
+                    次へ
+                </button>
+            </div>
         </form>
     </section>
     
@@ -30,6 +40,7 @@
             var currentQuestionIndex = 0;
             var totalScore = 0;
             var questions = [];
+            var userAnswers = []; // 変数の定義
 
             function displayQuestion(index) {
                 // Clear
@@ -62,11 +73,29 @@
             $('#submitButton').click(function (e) {
                 e.preventDefault();
 
-                // 選択したスコアを取得
-                var selectedScore = $('input[name="score"]:checked').val();
+                var currentQuestion = questions[currentQuestionIndex]; // currentQuestionの定義
+
+                // 選択したスコアとそのデータを取得
+                var selectedOption = $('input[name="score"]:checked');
+                var selectedScore = selectedOption.val();
+                var selectedOptionId = selectedOption.data('option-id');
+                var categoryId = currentQuestion.category_id;
+                var questionId = currentQuestion.question_id;
                 if (selectedScore) {
                     totalScore += parseInt(selectedScore, 10);
                 }
+
+                // 選択した回答をuserAnswersに保存
+                userAnswers.push({
+                    category_id: currentQuestion.category_id,
+                    question_id: currentQuestion.question_id,
+                    option_id: $('input[name="score"]:checked').data('option-id'),
+                    score: selectedScore
+                });
+
+                // userAnswersをJSON形式に変換して隠しフィールドにセット
+                $('#userAnswersInput').val(JSON.stringify(userAnswers));
+
 
                 // 次の質問を表示
                 currentQuestionIndex++;
@@ -74,21 +103,12 @@
                     displayQuestion(currentQuestionIndex);
                 } else {
                     alert('回答が完了しました。合計スコアは ' + totalScore + ' です。');
+                    $('#questionsForm').submit();  // フォームを送信する
                 }
             });
         });
     </script>
-    <br>
-    <div class="flex">
-        <button id="goBackButton"
-            class="text-center bg-emerald-100 hover:bg-blue-500 w-1/6 mx-auto px-4 py-2 rounded-full">
-            戻る
-        </button>
-        <button id="submitButton"
-            class="text-center bg-emerald-100 hover:bg-blue-500 w-1/6 mx-auto px-4 py-2 rounded-full">
-            次へ
-        </button>
-    </div>
+    
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </body>
 
