@@ -2,8 +2,26 @@
 session_start();
 ?>
 
-<section class="m-5 text-center" >
-<form action="home1.php" method="POST">
+<!-- 入れ替え -->
+ <h1 class="h-1/6 mt-20 text-center text-2xl font-extrabold">スマートライフ診断</h1>
+    <section class="text-center m-2">
+        <span class="text-center">
+        <p>なくてはならないスマートフォン</p>
+        <p>当たり前に使ってはいるけれど</p>
+        <br>
+        <p>みんなはどんな風に使ってるんだろう？</p>
+        <p>もっとできることがありそうだけど？</p>
+        <br>
+        <p>と思うことはありませんか？</p>
+        <p>SNSやニュースを見る以外に生活にいかせているか</p>
+        <p>ちょっと試してみませんか？</p>
+        </span>
+    </section>
+
+<!-- ここまで -->
+
+<section class="mt-20 text-center" >
+<form action="create.php" method="POST">
     <fieldset>
         <div class="text-center">
             お名前（ニックネーム）<br>
@@ -48,23 +66,11 @@ session_start();
 </head>
 
 <body class="md:flex h-full font-mono">
-     <h1 class="h-1/5 m-10 text-center text-2xl font-extrabold">スマートライフ診断</h1>
-    <section class="text-center m-10">
-        <span class="text-center">
-        <p>なくてはならないスマートフォン</p>
-        <p>当たり前に使ってはいるけれど</p>
-        <br>
-        <p>みんなはどんな風に使ってるんだろう？</p>
-        <p>もっとできることがありそうだけど？</p>
-        <br>
-        <p>と思うことはありませんか？</p>
-        <p>SNSやニュースを見る以外に生活にいかせているか</p>
-        <p>ちょっと試してみませんか？</p>
-        </span>
-    </section>
-    
 
-    
+    <div class="bg-custom-bg">
+        <!-- ここにコンテンツ> -->
+    </div>
+
     <!-- スマートライフ診断：非表示、最後に表示 -->
     <section class="h-10 text-center m-10 <?php if(!isset($_POST['username'])) { echo 'hidden'; } ?>">
     <h1 class="text-2xl font-extrabold " id='point'>あなたのスマートライフレベルは：<span data-point-num ></span>です。</h1>
