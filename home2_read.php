@@ -63,15 +63,14 @@ try {
         $answers = $_POST['answer'];
     
         foreach ($answers as $questionId => $optionId) {
-            // 選択された選択肢を検索
-            foreach ($results as $row) {
-                if ($row['question_id'] == $questionId && $row['option_id'] == $optionId) {
-                    $totalScore += $row['score'];
-                    // scores_tableに保存
-                    $insertScoreQuery = 'INSERT INTO scores_table(user_id, question_id, option_id, score) VALUES (:user_id, :question_id, :option_id, :score)';
-                    $scoreStmt = $pdo->prepare($insertScoreQuery);
-                    $scoreStmt->execute([':user_id' => $userId, ':question_id' => $questionId, ':option_id' => $optionId, ':score' => $row['score']]);
-                    break;
+        // 選択された選択肢を検索
+        foreach ($results as $row) {
+            if ($row['question_id'] == $questionId && $row['option_id'] == $optionId) {
+                // scores_tableに保存
+                $insertScoreQuery = 'INSERT INTO scores_table(user_id, question_id, option_id, score) VALUES (:user_id, :question_id, :option_id, :score)';
+                $scoreStmt = $pdo->prepare($insertScoreQuery);
+                $scoreStmt->execute([':user_id' => $userId, ':question_id' => $questionId, ':option_id' => $optionId, ':score' => $row['score']]);
+                break;
                 }
             }
         }
