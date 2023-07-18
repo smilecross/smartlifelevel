@@ -41,7 +41,7 @@ try {
     foreach ($result as $row) {
 
         // 質問に対応する選択肢を取得
-        $stmt = $pdo->prepare("SELECT question_id,option_text,score FROM options_table WHERE question_id = ?");
+        $stmt = $pdo->prepare("SELECT option_id, question_id,option_text,score FROM options_table WHERE question_id = ?");
         $stmt->execute([$row['question_id']]);
         $options = $stmt->fetchAll(PDO::FETCH_ASSOC);
         // $options = $stmt->fetchAll();
@@ -49,6 +49,7 @@ try {
         // カテゴリー、質問、回答、スコアの4項目だけ取得
         $question_options[$row['question_text']] = array(
             'category' => $row['category_id'],
+            'question_id' => $row['question_id'],  // question_idを追加
             'question' => $row['question_text'],
             'options' => $options,
         );
