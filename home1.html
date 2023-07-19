@@ -5,16 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com" rel="stylesheet"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
-<body class="md:flex mt-16 h-full font-mono">
+<body class="md:flex mt-16 h-full">
     <section class="bg-emerald-100 text-gray-800 flex flex-col w-4/5 mx-auto px-4 py-2 rounded-lg">
         <form id="questionsForm" action="score_process.php" method="post">
             <input type="hidden" id="userAnswersInput" name="userAnswers">
-            <h2 class="text-lg font-bold text-center m-5"> </h2>
+            <h2 class="text-lg font-extrabold text-center m-5"> </h2>
             <ul id="questionList" class="text-left text-lg  mt-8 mb-8 space-y-10">
             </ul>
             <div class="flex">
@@ -29,6 +28,7 @@
             </div>
         </form>
     </section>
+
 
     <script>
         $(document).ready(function () {
@@ -46,15 +46,27 @@
 
                 var optionList = $('<ul/>'); // 新しいul要素を作成
 
-                question.options.forEach(function (option) {
+                question.options.forEach(function (option, index) {
                     // 各回答オプションを新しいul要素内に表示
-                    optionList.append('<li><input type="radio" name="score" value="' + option.score + '" data-option-id="' + option.option_id + '">' + option.option_text + '</li>');
-                
+                    optionList.append(`
+                    <li>
+                        <input type="radio" id="option-${index}" name="score" data-id="${option.option_id}" data-score="${option.score}" class="hidden peer" required>
+                        <label for="option-${index}" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                            <div class="block">
+                                <div class="w-full text-lg font-semibold">${option.option_text}</div>
+                            </div>
+                            <svg class="w-5 h-5 ml-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            </svg>
+                        </label>
+                    </li>
+                    `);
+                    
                     // optionの内容をコンソールに出力
                     console.log(option);
                 });
 
-                $('#questionList').append(optionList); // 新しいul要素を#questionListに追加
+            $('#questionList').append(optionList); // 新しいul要素を#questionListに追加
             }
             
               $.ajax({
@@ -87,8 +99,15 @@
                 // 選択したスコアとそのデータを取得
                 var selectedOption = $('input[name="score"]:checked');
                 console.log(selectedOption[0]); // 確認のために選択したオプションのHTML要素を表示
-                var selectedScore = selectedOption.val();
-                var selectedOptionId = parseInt(selectedOption.data('option-id'), 10); // data-option-idの値を整数に変換
+                
+                if (!selectedOption.length) { // 選択された回答がない場合
+                    alert("Please select an answer before proceeding.");
+                    return;
+                }
+
+                var selectedScore = selectedOption.data('score');
+                var selectedOptionId = selectedOption.data('id');
+                var selectedOptionId = parseInt(selectedOption.data('id'), 10); // data-option-idの値を整数に変換
                 console.log(selectedOptionId); // 確認のために選択したオプションのIDを表示
 
                 if (selectedScore) {
@@ -102,9 +121,9 @@
                     option_id: selectedOptionId,
                     score: selectedScore
                 });
-
                 // Debug: userAnswersの内容をコンソールに表示
                 console.log('userAnswers:', userAnswers);
+
 
                 // userAnswersをJSON形式に変換して隠しフィールドにセット
                 $('#userAnswersInput').val(JSON.stringify(userAnswers));
@@ -119,13 +138,29 @@
                     $('#questionsForm').submit();  // フォームを送信する
                 }
             });
+
+              $('#goBackButton').click(function (e) {
+                e.preventDefault();
+
+                if (currentQuestionIndex > 0) { // 最初の質問よりも先に進んでいる場合
+                    currentQuestionIndex--;
+                    displayQuestion(currentQuestionIndex);
+                } else {
+                    alert("You're already at the first question.");
+                }
+            });
         });
     </script>
 
 
-
-
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <!-- footer -->
+    <footer class="text-center">
+        <div>
+            <img src="img/fukuoka1.png" alt="" class="inline">
+        </div>
+        <p class="text-xs">©️2023 CROSSHERT All Rights Reserved. </p>
+    </footer>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.0.js"></script> -->
 </body>
 
 </html>
