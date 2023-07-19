@@ -87,6 +87,12 @@
                 // 選択したスコアとそのデータを取得
                 var selectedOption = $('input[name="score"]:checked');
                 console.log(selectedOption[0]); // 確認のために選択したオプションのHTML要素を表示
+                
+                if (!selectedOption.length) { // 選択された回答がない場合
+                    alert("Please select an answer before proceeding.");
+                    return;
+                }
+
                 var selectedScore = selectedOption.val();
                 var selectedOptionId = parseInt(selectedOption.data('option-id'), 10); // data-option-idの値を整数に変換
                 console.log(selectedOptionId); // 確認のために選択したオプションのIDを表示
@@ -102,9 +108,9 @@
                     option_id: selectedOptionId,
                     score: selectedScore
                 });
-
                 // Debug: userAnswersの内容をコンソールに表示
                 console.log('userAnswers:', userAnswers);
+
 
                 // userAnswersをJSON形式に変換して隠しフィールドにセット
                 $('#userAnswersInput').val(JSON.stringify(userAnswers));
@@ -117,6 +123,17 @@
                 } else {
                     alert('回答が完了しました。合計スコアは ' + totalScore + ' です。');
                     $('#questionsForm').submit();  // フォームを送信する
+                }
+            });
+
+              $('#goBackButton').click(function (e) {
+                e.preventDefault();
+
+                if (currentQuestionIndex > 0) { // 最初の質問よりも先に進んでいる場合
+                    currentQuestionIndex--;
+                    displayQuestion(currentQuestionIndex);
+                } else {
+                    alert("You're already at the first question.");
                 }
             });
         });

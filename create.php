@@ -16,6 +16,10 @@ try {
   // ユーザーのニックネームを取得
   $username = $_POST['username'];
 
+   // ここで$_POST['username']の値を確認
+  // var_dump($_POST['username']);
+  // exit;
+
   // ユーザーの回答をデータベースに保存
   $query = "INSERT INTO users_table (username) VALUES (?)";
   $stmt = $pdo->prepare($query);
@@ -26,6 +30,7 @@ try {
 
   // セッションにユーザーIDを保存
   $_SESSION['user_id'] = $userId;
+  $_SESSION['username'] = $username;
 
   // home1.phpを表示し、home1_read.phpを実行するリダイレクト
   header("Location: home1.html");
