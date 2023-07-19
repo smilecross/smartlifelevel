@@ -90,13 +90,23 @@ try {
     </div>
 
     <!-- スマートライフ診断：非表示、最後に表示 -->
-    <section class="h-10 text-center m-10">
-    <?php echo "<h1 class='text-2xl font-extrabold ' id='point'>{$username}さんのスマートライフレベルは：{$level}です。</h1>"; ?>
+    <section class="h-10 text-center mt-20 mb-20">
+    <?php echo "<h1 class='text-2xl font-extrabold ' id='point'>{$username}さんの <br> スマートライフレベルは：レベル{$level}です。</h1>"; ?>
     </section>
 
-    <a href="level<?php echo $level; ?>.php"><button>詳しく</button></a>
+    
+    
+    <div class="flex justify-center items-center mt-30 bg-yellow-500 hover:bg-emerald-100 m-4 h-8 w-1/4 mx-auto rounded-full">
+        <a href="level<?php echo $level; ?>.php"><button>詳しく</button></a>              
+    </div>
+
+     <!-- footer -->
     <footer class="text-center">
-            <p>©️2023 CROSSHERT All Rights Reserved. </p>
+        <div class="mt-20">
+            <img src="img/fukuoka1.png" alt="" class="inline">
+        </div>
+        <p class="text-xs">©️2023 CROSSHERT All Rights Reserved. </p>
     </footer>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.0.js"></script> -->
 </body>
 </html>

@@ -47,16 +47,18 @@ try {
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="substyle.css">
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <title>SmartLife.Level1</title>
+    <script src="https://cdn.tailwindcss.com" rel="stylesheet"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
     <!-- レーダーチャート -->
-    <canvas id="Chart5" width="350px" height="350px"></canvas>
+    <div class="flex justify-center items-center mt-10 mb-10">
+        <canvas id="Chart1" width="300px" height="300px"></canvas>
+    </div>
     
     <script>
     const labels = <?php echo json_encode($labels); ?>;
@@ -66,7 +68,7 @@ try {
     const data = {
         labels: labels, // PHPから受け取ったラベルを利用
         datasets: [{
-            label: 'Dataset 1',
+            label: 'スコア',
             data: scores, // PHPから受け取ったスコアを利用
             borderColor: 'rgba(255, 99, 132, 1)',
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
@@ -90,7 +92,7 @@ try {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Chart.js Radar Chart'
+                    text: '診断結果'
                 }
             }
         },
@@ -103,50 +105,42 @@ try {
     );
     </script>
     
-    <!-- <h1>スマートライフ診断</h1> -->
-
+    <h2 class="mt-10 text-center text-xl font-semibold">Level.1</h2>
     <!-- modalOne -->
-    <div id="modalOne" class="modal-container">
-        <div class="modal-body">
-            <div class="modal-content">
-                <img class="img" src="img/level1.png" alt="">
-                <h3>時には、新しいものも試してみてね（^_-）</h3>
+        <div class="m-10" id="modalOne">
+                <h3 class="font-semibold">時には、新しいものも試してみてね（^_-）</h3>
                 <p>LINEのやり取りはできているけれど、他の機能はほとんど使うこともなくできればガラケーに戻したい、そんな風に感じている方もいるかもしれませんね！<br>
                     これから日本は人口が減ってどこも人が足りなくなり、それを補うためにデジタル化が進んでいきます。慣れるまでは確かに不安も面倒くささも付きまとうと思いますが、大手携帯電話ショップでは無料のスマホ教室も開催されているので、ぜひ活用してみて下さいね😉
                 </p>
                 <br>
                 <p style="text-align: center;">* * * * *</p>
-                <h4><span>基本操作をマスターする</span></h4>
+                <h4 class="font-semibold"><span>基本操作をマスターする</span></h4>
                 <h5>スマホ教室</h5>
                 <p>大手携帯電話各社やパソコン教室なので開催される「スマホ教室」。基本操作から丁寧に教えてもらえるので、覗いてみてはいかがでしょう？</p>
-                <h4><span>色々な情報に触れる</span></h4>
+                <h4 class="font-semibold"><span>色々な情報に触れる</span></h4>
                 <h5>暮らしとお金とテクノロジー</h5>
                 <p>暮らし+テクノロジー」「お金＋テクノロジー」をテーマにInstagramを通して情報をお届けするメディア</p>
-                <a href="https://www.instagram.com/life.money.tech" class="level_btn">詳しく</a>
-            </div>
+                <div class="flex justify-center items-center bg-yellow-500 hover:bg-emerald-100 m-4 h-8 w-1/4 mx-auto rounded-full">
+                    <a href="https://www.instagram.com/life.money.tech" >詳しく</a>        
+                </div>
         </div>
-    </div>
     <!-- modalOne -->
 
     <!--要件：SNSボタン -->
-    <!-- <div class="wrapper" >
-            <div class='r_btn_box'>
-                <a href="http://www.facebook.com/share.php?u={URL}" rel="nofollow noopener" target="_blank"><img
-                        src="img/fb-black.png" alt=""></a>
-                <a href="https://twiter.com/share?url={URL}" rel="nofollow noopener" target="_blank"><img
-                        src="img/twitter-black.png" alt=""></a>
-                <a href="http://line.me/R/msg/text/?{URL}%0a{ページのタイトルなど表示したいテキスト}" target="_blank"
-                    rel="nofollow noopener"><img src="img/LINE-black.png" alt=""></a>
-            </div>
-        </div> -->
-    <a href="index.html" class="top_btn">戻る</a>
-    <!-- footer -->
-    <footer>
+        <div class="flex justify-center h-20 m-10" >
+                <a class="object-contain" href="http://www.facebook.com/share.php?u={URL}" rel="nofollow noopener" target="_blank">
+                    <img class="w-8 h-8 m-2" src="img/fb-black.png" alt=""></a>
+                <a class="object-contain" href="https://twiter.com/share?url={URL}" rel="nofollow noopener" target="_blank">
+                    <img class="w-8 h-8 m-2" src="img/twitter-black.png" alt=""></a>
+                <a class="object-contain" href="http://line.me/R/msg/text/?{URL}%0a{ページのタイトルなど表示したいテキスト}" target="_blank"
+                    rel="nofollow noopener">
+                    <img class="w-8 h-8 m-2" src="img/LINE-black.png" alt=""></a>
+        </div>
 
-        <p id="copy">©️2023 CROSSHERT All Rights Reserved. </p>
-    </footer>
+        <div class="flex justify-center items-center bg-emerald-100  hover:bg-yellow-500 m-4 h-8 w-1/6 rounded-full">
+                <a href="index.html" >戻る</a>
+        </div>
 
-    <script src="main.js" type="text/javascript"></script>
+        <p class="text-xs">©️2023 CROSSHERT All Rights Reserved. </p>
 </body>
-
 </html>
