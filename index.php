@@ -63,19 +63,6 @@ session_start();
 </head>
 
 <body class="md:flex h-full font-mono">
-   
-    <!--要件１：SNSボタンは非表示からの最後に表示 -->
-    <!-- <div class="flex" >
-        <div class='r_btn_box'>
-            <a href="http://www.facebook.com/share.php?u={URL}" rel="nofollow noopener" target="_blank"><img
-                    src="img/fb-black.png" alt=""></a>
-            <a href="https://twiter.com/share?url={URL}" rel="nofollow noopener" target="_blank"><img
-                    src="img/twitter-black.png" alt=""></a>
-            <a href="http://line.me/R/msg/text/?{URL}%0a{ページのタイトルなど表示したいテキスト}" target="_blank"
-                rel="nofollow noopener"><img src="img/LINE-black.png" alt=""></a>
-        </div>
-    </div> -->
-   
     
     <!-- footer -->
     <footer class="text-center">

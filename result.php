@@ -20,7 +20,6 @@ try {
     $username = $_SESSION['username'];
 
 
-
     // ユーザーの全ての回答を取得します。
     $stmt = $pdo->prepare("SELECT score FROM scores_table WHERE user_id = ?");
     $stmt->execute([$_SESSION['user_id']]);
@@ -31,6 +30,44 @@ try {
     foreach ($results as $result) {
         $totalScore += $result['score'];
     }
+
+    // カテゴリ数を取得します。
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM categories_table");
+    $stmt->execute();
+    $totalNumberOfCategories = $stmt->fetchColumn();
+
+    // カテゴリ別スコアを取得します。
+    $categoryScores = [];
+    for ($categoryId = 1; $categoryId <= $totalNumberOfCategories; $categoryId++) {
+        $stmt = $pdo->prepare("SELECT score FROM scores_table WHERE user_id = ? AND category_id = ?");
+        $stmt->execute([$_SESSION['user_id'], $categoryId]);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $categoryScore = 0;
+        foreach ($results as $result) {
+            $categoryScore += $result['score'];
+        }
+        
+        $categoryScores[$categoryId] = $categoryScore;
+    }
+
+    // ここから追加
+    $categoryScores = [];
+    for ($categoryId = 1; $categoryId <= $totalNumberOfCategories; $categoryId++) {
+        $stmt = $pdo->prepare("SELECT score FROM scores_table WHERE user_id = ? AND category_id = ?");
+        $stmt->execute([$_SESSION['user_id'], $categoryId]);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $categoryScore = 0;
+        foreach ($results as $result) {
+            $categoryScore += $result['score'];
+        }
+        
+        $categoryScores[$categoryId] = $categoryScore;
+    }
+
+    $_SESSION['category_scores'] = $categoryScores;
+
 
     // スマートライフレベルを決定します。
     if ($totalScore >= 55) {
@@ -67,9 +104,6 @@ try {
     <meta property="og:image" content="img/smartlifecheck.png">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com" rel="stylesheet"></script>
-    <link rel="stylesheet" href="style.css">
-    <!-- <script src="main.js" type="text/javascript"></script> -->
-    
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
     <!-- Google tag (gtag.js) -->

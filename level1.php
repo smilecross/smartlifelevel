@@ -61,8 +61,9 @@ try {
     </div>
     
     <script>
-    const labels = <?php echo json_encode($labels); ?>;
-    const scores = <?php echo json_encode($scores); ?>;
+        const labels = <?php echo json_encode($labels); ?>;
+        const scores = <?php echo json_encode($scores); ?>;
+        console.log(scores);
 
     // チャートのデータ指定
     const data = {
@@ -75,33 +76,30 @@ try {
         }]
     };
 
-    const config = {
-        type: 'radar',
-        data: data,
-        options: {
-            scales: {
-                r: {
-                    min: 0,
-                    max: 10,
-                    ticks: {
-                        stepSize: 1
+    const myChart = new Chart(
+        document.getElementById('Chart1').getContext('2d'), // ここは適切な要素のIDに変更
+        {
+            type: 'radar',
+            data: data,
+            options: {
+                scales: {
+                    r: {
+                        min: 0,
+                        max: 1,
+                        ticks: {
+                            stepSize: 0.2
+                        }
+                    }
+                },
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '診断結果'
                     }
                 }
-            },
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: '診断結果'
-                }
             }
-        },
-    };
-
-         // チャートを描画
-    const myChart = new Chart(
-        document.getElementById('Chart5'), // ここもChart5に修正
-        config
+        }
     );
     </script>
     
@@ -110,7 +108,7 @@ try {
         <div class="m-10" id="modalOne">
                 <h3 class="font-semibold">時には、新しいものも試してみてね（^_-）</h3>
                 <p>LINEのやり取りはできているけれど、他の機能はほとんど使うこともなくできればガラケーに戻したい、そんな風に感じている方もいるかもしれませんね！<br>
-                    これから日本は人口が減ってどこも人が足りなくなり、それを補うためにデジタル化が進んでいきます。慣れるまでは確かに不安も面倒くささも付きまとうと思いますが、大手携帯電話ショップでは無料のスマホ教室も開催されているので、ぜひ活用してみて下さいね😉
+                    これから日本は人口が減ってどこも人が足りなくなり、それを補うためにデジタル化が進んでいきます。慣れるまでは確かに不安も面倒くささも付きまとうと思いますが、大手携帯電話ショップでは無料のスマホ教室も開催されているので、ぜひ活用してみて下さいね(^_-)
                 </p>
                 <br>
                 <p style="text-align: center;">* * * * *</p>
@@ -128,11 +126,11 @@ try {
 
     <!--要件：SNSボタン -->
         <div class="flex justify-center h-20 m-10" >
-                <a class="object-contain" href="http://www.facebook.com/share.php?u={URL}" rel="nofollow noopener" target="_blank">
+                <a class="object-contain" href="http://www.facebook.com/share.php?u=https://sub.life-money-tech.com/index.html" rel="nofollow noopener" target="_blank">
                     <img class="w-8 h-8 m-2" src="img/fb-black.png" alt=""></a>
-                <a class="object-contain" href="https://twiter.com/share?url={URL}" rel="nofollow noopener" target="_blank">
+                <a class="object-contain" href="https://twitter.com/share?url=https://sub.life-money-tech.com/index.html" rel="nofollow noopener" target="_blank">
                     <img class="w-8 h-8 m-2" src="img/twitter-black.png" alt=""></a>
-                <a class="object-contain" href="http://line.me/R/msg/text/?{URL}%0a{ページのタイトルなど表示したいテキスト}" target="_blank"
+                <a class="object-contain" href="http://line.me/R/msg/text/?https://sub.life-money-tech.com/index.html%0aスマートライフ診断を試してみて下さい!" target="_blank"
                     rel="nofollow noopener">
                     <img class="w-8 h-8 m-2" src="img/LINE-black.png" alt=""></a>
         </div>
