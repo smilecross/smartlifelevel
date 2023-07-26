@@ -5,9 +5,9 @@ session_start();
 //  var_dump($_POST);
 // exit(); 
 
-$dbn ='mysql:dbname=sllev_db;charset=utf8mb4;port=3306;host=localhost';
-$user = 'root';
-$pwd = '';
+$dbn ='mysql:dbname=crossheart_sllevdb;charset=utf8mb4;port=3306;host=mysql1301b.xserver.jp';
+$user = 'crossheart_2dast';  //毎回同じ  サーバー使う時はサーバー側から指示あり
+$pwd = 'smartlife2525'; //毎回同じ
 
 try {
     $pdo = new PDO($dbn, $user, $pwd);

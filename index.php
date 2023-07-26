@@ -3,7 +3,7 @@ session_start();
 ?>
 
 <!-- 入れ替え -->
- <h1 class="h-1/6 mt-20 text-center text-2xl font-extrabold">スマートライフ診断</h1>
+ <h1 class="h-1/6 mt-20 text-center text-2xl font-extrabold text-stone-800">スマートライフ診断</h1>
     <section class="text-center m-2">
         <span class="text-center">
         <p>なくてはならないスマートフォン</p>
@@ -31,6 +31,9 @@ session_start();
         <div class="flex justify-center items-center bg-yellow-500 hover:bg-emerald-100 h-8 w-1/4 mx-auto rounded-full">
             <input type="submit" value="スタート">
         </div>
+        <br>
+      
+            <p class="text-center text-sm">質問は全30問</p>
     </fieldset>
 </form>
 </section>
@@ -44,7 +47,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:url" content="https://sub.life-money-tech.com/index.html">
     <meta property="og:title" content="スマートライフ診断">
-    <meta property="og:description" content="スマホが欠かせない時代、これからは生活に活かせす時代です。どのくらい使いこなせているかちょっと調べてみませんか？">
+    <meta property="og:description" content="スマホが欠かせない時代、これからは生活に活かす時代です。どのくらい使いこなせているかちょっと調べてみませんか？">
     <meta property="og:type" content="Web">
     <meta property="og:image" content="img/smartlifecheck.png">
     <title>Document</title>
@@ -62,12 +65,12 @@ session_start();
     </script>
 </head>
 
-<body class="md:flex h-full font-mono">
+<body class="h-full bg-zinc-100 font-mono text-stone-800">
     
     <!-- footer -->
     <footer class="text-center">
         <div>
-            <img src="img/fukuoka1.png" alt="" class="inline">
+            <img src="img/fukuoka3.png" alt="" class="inline">
         </div>
         <p class="text-xs">©️2023 CROSSHERT All Rights Reserved. </p>
     </footer>

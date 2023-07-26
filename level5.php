@@ -2,9 +2,9 @@
 session_start();
 // var_dump($_SESSION['category_scores']);
 
-$dbn ='mysql:dbname=sllev_db;charset=utf8mb4;port=3306;host=localhost';
-$user = 'root';
-$pwd = '';
+$dbn ='mysql:dbname=crossheart_sllevdb;charset=utf8mb4;port=3306;host=mysql1301b.xserver.jp';
+$user = 'crossheart_2dast';  //毎回同じ  サーバー使う時はサーバー側から指示あり
+$pwd = 'smartlife2525'; //毎回同じ
 
 try {
     $pdo = new PDO($dbn, $user, $pwd);
@@ -140,7 +140,7 @@ try {
         </div>
 
         <div class="flex justify-center items-center bg-emerald-100  hover:bg-yellow-500 m-4 h-8 w-1/6 rounded-full">
-                <a href="index.html" >戻る</a>
+                <a href="https://sub.life-money-tech.com/" >TOPに戻る</a>
         </div>
 
         <p class="text-xs">©️2023 CROSSHERT All Rights Reserved. </p>

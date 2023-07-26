@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-$dbn ='mysql:dbname=sllev_db;charset=utf8mb4;port=3306;host=localhost';
-$user = 'root';
-$pwd = '';
+$dbn ='mysql:dbname=crossheart_sllevdb;charset=utf8mb4;port=3306;host=mysql1301b.xserver.jp';
+$user = 'crossheart_2dast';  //毎回同じ  サーバー使う時はサーバー側から指示あり
+$pwd = 'smartlife2525'; //毎回同じ
 
 try {
     $pdo = new PDO($dbn, $user, $pwd);
@@ -116,7 +116,10 @@ try {
                 <h4 class="font-semibold"><span>新しい情報に触れる</span></h4>
                 <h5>暮らしとお金とテクノロジー</h5>
                 <p>暮らし+テクノロジー」「お金＋テクノロジー」をテーマにInstagramを通して情報をお届けするメディア「暮らしとお金とテクノロジー」</p>
-                <a href="https://www.instagram.com/life.money.tech" class="level_btn">詳しく</a>
+                <div class="flex justify-center items-center bg-yellow-500 hover:bg-emerald-100 m-4 h-8 w-1/4 mx-auto rounded-full">
+                    <a href="https://www.instagram.com/life.money.tech" >詳しく</a>
+                </div>
+                <br>
                 <h4 class="font-semibold"><span>基本操作をマスターする</span></h4>
                 <h5>スマホ教室</h5>
                 <p>大手携帯電話各社やパソコン教室なので開催される「スマホ教室」。基本操作から丁寧に教えてもらえるので、覗いてみてはいかがでしょう？</p>
@@ -135,7 +138,7 @@ try {
         </div>
 
         <div class="flex justify-center items-center bg-emerald-100  hover:bg-yellow-500 m-4 h-8 w-1/6 rounded-full">
-                <a href="index.html" >戻る</a>
+                <a href="https://sub.life-money-tech.com/" >TOPに戻る</a>
         </div>
 
         <p class="text-xs">©️2023 CROSSHERT All Rights Reserved. </p>

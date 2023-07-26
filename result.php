@@ -4,9 +4,9 @@ session_start();
 //  var_dump($_POST);
 // exit(); 
 
-$dbn ='mysql:dbname=sllev_db;charset=utf8mb4;port=3306;host=localhost';
-$user = 'root';
-$pwd = '';
+$dbn ='mysql:dbname=crossheart_sllevdb;charset=utf8mb4;port=3306;host=mysql1301b.xserver.jp';
+$user = 'crossheart_2dast';  //毎回同じ  サーバー使う時はサーバー側から指示あり
+$pwd = 'smartlife2525'; //毎回同じ
 
 try {
     $pdo = new PDO($dbn, $user, $pwd);
@@ -117,7 +117,7 @@ try {
     </script>
 </head>
 
-<body class="md:flex h-full font-mono">
+<body class=" text-stone-800 h-full font-mono">
 
     <div class="bg-custom-bg">
         <!-- ここにコンテンツ> -->
@@ -125,7 +125,7 @@ try {
 
     <!-- スマートライフ診断：非表示、最後に表示 -->
     <section class="h-10 text-center mt-20 mb-20">
-    <?php echo "<h1 class='text-2xl font-extrabold ' id='point'>{$username}さんの <br> スマートライフレベルは：レベル{$level}です。</h1>"; ?>
+    <?php echo "<h1 class='text-2xl font-extrabold ' id='point'>{$username}さんの <br> スマートライフレベルは： <br> レベル{$level}です。</h1>"; ?>
     </section>
 
     
@@ -137,7 +137,7 @@ try {
      <!-- footer -->
     <footer class="text-center">
         <div class="mt-20">
-            <img src="img/fukuoka1.png" alt="" class="inline">
+            <img src="img/fukuoka3.png" alt="" class="inline">
         </div>
         <p class="text-xs">©️2023 CROSSHERT All Rights Reserved. </p>
     </footer>
