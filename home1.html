@@ -9,7 +9,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
+
+<body class="bg-zinc-100 text-stone-800 mt-10 h-full">
+<!-- 戻るボタン -->
+    <div className="flex top-0 sticky">
+        <button id="goBackButton"  type="button"
+            className="absolute rounded-full text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+                className="stroke-2 w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+            <span class="text-sm mx-0.5" className="sr-only">戻る</span>
+        </button>
+    </div>
+<!-- 戻るボタン ここまで-->
+  
 <body class="md:flex mt-16 h-full">
+
     <section class="bg-emerald-100 text-gray-800 flex flex-col w-4/5 mx-auto px-4 py-2 rounded-lg">
         <form id="questionsForm" action="score_process.php" method="post">
             <input type="hidden" id="userAnswersInput" name="userAnswers">
@@ -17,12 +33,12 @@
             <ul id="questionList" class="text-left text-lg  mt-8 mb-8 space-y-10">
             </ul>
             <div class="flex">
-                <button id="goBackButton" type="button"
+                <!-- <button id="goBackButton" type="button"
                     class="text-center bg-emerald-100 hover:bg-blue-500 w-1/6 mx-auto px-4 py-2 rounded-full">
                     戻る
-                </button>
+                </button> -->
                 <button id="submitButton" type="submit"
-                    class="text-center bg-emerald-100 hover:bg-blue-500 w-1/6 mx-auto px-4 py-2 rounded-full">
+                    class="text-center bg-emerald-100 hover:bg-blue-500 w-1/4 mx-auto px-4 py-2 rounded-full">
                     次へ
                 </button>
             </div>
@@ -42,7 +58,7 @@
                 $('#questionList').empty();
 
                 var question = questions[index];
-                $('#questionList').append('<h2>' + question.question + '</h2>');
+                $('#questionList').append('<h2 class="text-lg font-extrabold ">' + question.question + '</h2>');
 
                 var optionList = $('<ul/>'); // 新しいul要素を作成
 
@@ -55,9 +71,13 @@
                             <div class="block">
                                 <div class="w-full text-lg font-semibold">${option.option_text}</div>
                             </div>
+
+                             
+
                             <svg class="w-5 h-5 ml-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                             </svg>
+
                         </label>
                     </li>
                     `);
@@ -101,7 +121,9 @@
                 console.log(selectedOption[0]); // 確認のために選択したオプションのHTML要素を表示
                 
                 if (!selectedOption.length) { // 選択された回答がない場合
-                    alert("Please select an answer before proceeding.");
+
+                    // alert("Please select an answer before proceeding.");
+
                     return;
                 }
 
@@ -134,7 +156,7 @@
                 if (currentQuestionIndex < questions.length) {
                     displayQuestion(currentQuestionIndex);
                 } else {
-                    alert('回答が完了しました。合計スコアは ' + totalScore + ' です。');
+                    // alert('回答が完了しました。合計スコアは ' + totalScore + ' です。');
                     $('#questionsForm').submit();  // フォームを送信する
                 }
             });
@@ -146,7 +168,9 @@
                     currentQuestionIndex--;
                     displayQuestion(currentQuestionIndex);
                 } else {
-                    alert("You're already at the first question.");
+
+                    alert("これは1問目です。これ以上、戻れません。");
+
                 }
             });
         });
@@ -156,7 +180,9 @@
     <!-- footer -->
     <footer class="text-center">
         <div>
-            <img src="img/fukuoka1.png" alt="" class="inline">
+
+            <img src="img/fukuoka3.png" alt="" class="inline">
+
         </div>
         <p class="text-xs">©️2023 CROSSHERT All Rights Reserved. </p>
     </footer>

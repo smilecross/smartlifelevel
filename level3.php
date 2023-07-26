@@ -1,9 +1,11 @@
 <?php
 session_start();
 
+
 $dbn ='mysql:dbname=sllev_db;charset=utf8mb4;port=3306;host=localhost';
 $user = 'root';
 $pwd = '';
+
 
 try {
     $pdo = new PDO($dbn, $user, $pwd);
@@ -64,6 +66,9 @@ try {
     const labels = <?php echo json_encode($labels); ?>;
     const scores = <?php echo json_encode($scores); ?>;
 
+    console.log(scores);
+
+
     // チャートのデータ指定
     const data = {
         labels: labels, // PHPから受け取ったラベルを利用
@@ -75,35 +80,35 @@ try {
         }]
     };
 
-    const config = {
-        type: 'radar',
-        data: data,
-        options: {
-            scales: {
-                r: {
-                    min: 0,
-                    max: 10,
-                    ticks: {
-                        stepSize: 1
+
+    const myChart = new Chart(
+        document.getElementById('Chart3').getContext('2d'), // ここは適切な要素のIDに変更
+        {
+            type: 'radar',
+            data: data,
+            options: {
+                scales: {
+                    r: {
+                        min: 0,
+                        max: 1,
+                        ticks: {
+                            stepSize: 0.2
+                        }
+                    }
+                },
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '診断結果'
                     }
                 }
-            },
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: '診断結果'
-                }
             }
-        },
-    };
-
-         // チャートを描画
-    const myChart = new Chart(
-        document.getElementById('Chart3'), // ここもChart5に修正
-        config
+        }
     );
-    </script>
+</script>
+
+
 
     <h2 class="mt-10 text-center text-xl font-semibold">Level.3</h2>
 
@@ -111,14 +116,21 @@ try {
         <div class="m-10" id="modalThree">
                 <h3 class="font-semibold">いいね！でも、もっとイケるでしょう！</h3>
                 <p>天気予報やニュースはもちろん、SNSやキャッシュレスも活用して利便性を感じているのではないでしょうか。<br>
-                    ただ、もっと使いこなせるようになりたい！そう思っている方もいるかもしれませんね？これから行政サービスも自宅からスマホでできる時代になります。不安もあると思いますが、安全に安心してスマホを活用できるように情報をアップデートしていくと良さそうですね😉
+
+                    ただ、もっと使いこなせるようになりたい！そう思っている方もいるかもしれませんね？これから行政サービスをはじめ様々なサービスが自宅からスマホでできる時代になります。不安もあると思いますが、安全に安心してスマホを活用できるように情報をアップデートしてみてはいかがでしょう^^
+
                 </p>
                 <br>
                 <p style="text-align: center;">* * * * *</p>
                 <h4 class="font-semibold"><span>新しい情報に触れる</span></h4>
                 <h5>暮らしとお金とテクノロジー</h5>
                 <p>暮らし+テクノロジー」「お金＋テクノロジー」をテーマにInstagramを通して情報をお届けするメディア「暮らしとお金とテクノロジー」</p>
-                <a href="https://www.instagram.com/life.money.tech" class="level_btn">詳しく</a>
+
+                <div class="flex justify-center items-center bg-yellow-500 hover:bg-emerald-100 m-4 h-8 w-1/4 mx-auto rounded-full">
+                    <a href="https://www.instagram.com/life.money.tech" >詳しく</a>
+                </div>
+                <br>
+
                 <h4 class="font-semibold"><span>知識を深める</span></h4>
                 <h5>アプリCafe</h5>
                 <p>月に一度のオンラインアプリCafeでは、デジタルな話題を中心に暮らしの変化について解説するオンラインで開催される無料セミナーです。</p>
@@ -130,17 +142,21 @@ try {
 
     <!--要件：SNSボタン -->
         <div class="flex justify-center h-20 m-10" >
-                <a class="object-contain" href="http://www.facebook.com/share.php?u={URL}" rel="nofollow noopener" target="_blank">
+
+                <a class="object-contain" href="http://www.facebook.com/share.php?u=https://sub.life-money-tech.com/index.html" rel="nofollow noopener" target="_blank">
                     <img class="w-8 h-8 m-2" src="img/fb-black.png" alt=""></a>
-                <a class="object-contain" href="https://twiter.com/share?url={URL}" rel="nofollow noopener" target="_blank">
+                <a class="object-contain" href="https://twitter.com/share?url=https://sub.life-money-tech.com/index.html" rel="nofollow noopener" target="_blank">
                     <img class="w-8 h-8 m-2" src="img/twitter-black.png" alt=""></a>
-                <a class="object-contain" href="http://line.me/R/msg/text/?{URL}%0a{ページのタイトルなど表示したいテキスト}" target="_blank"
+                <a class="object-contain" href="http://line.me/R/msg/text/?https://sub.life-money-tech.com/index.html%0aスマートライフ診断を試してみて下さい!" target="_blank"
+
                     rel="nofollow noopener">
                     <img class="w-8 h-8 m-2" src="img/LINE-black.png" alt=""></a>
         </div>
 
         <div class="flex justify-center items-center bg-emerald-100  hover:bg-yellow-500 m-4 h-8 w-1/6 rounded-full">
-                <a href="index.html" >戻る</a>
+
+                <a href="https://sub.life-money-tech.com/" >TOPに戻る</a>
+
         </div>
 
         <p class="text-xs">©️2023 CROSSHERT All Rights Reserved. </p>
