@@ -4,9 +4,11 @@ session_start();
 //  var_dump($_POST);
 // exit(); 
 
-$dbn ='mysql:dbname=crossheart_sllevdb;charset=utf8mb4;port=3306;host=mysql1301b.xserver.jp';
-$user = 'crossheart_2dast';  //毎回同じ  サーバー使う時はサーバー側から指示あり
-$pwd = 'smartlife2525'; //毎回同じ
+
+$dbn ='mysql:dbname=sllev_db;charset=utf8mb4;port=3306;host=localhost';
+$user = 'root';
+$pwd = '';
+
 
 try {
     $pdo = new PDO($dbn, $user, $pwd);
@@ -20,6 +22,8 @@ try {
     $username = $_SESSION['username'];
 
 
+
+
     // ユーザーの全ての回答を取得します。
     $stmt = $pdo->prepare("SELECT score FROM scores_table WHERE user_id = ?");
     $stmt->execute([$_SESSION['user_id']]);
@@ -30,6 +34,7 @@ try {
     foreach ($results as $result) {
         $totalScore += $result['score'];
     }
+
 
     // カテゴリ数を取得します。
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM categories_table");
@@ -69,6 +74,7 @@ try {
     $_SESSION['category_scores'] = $categoryScores;
 
 
+
     // スマートライフレベルを決定します。
     if ($totalScore >= 55) {
         $level = 5;
@@ -104,6 +110,7 @@ try {
     <meta property="og:image" content="img/smartlifecheck.png">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com" rel="stylesheet"></script>
+
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
     <!-- Google tag (gtag.js) -->
@@ -117,7 +124,9 @@ try {
     </script>
 </head>
 
+
 <body class=" text-stone-800 h-full font-mono">
+
 
     <div class="bg-custom-bg">
         <!-- ここにコンテンツ> -->
@@ -125,7 +134,9 @@ try {
 
     <!-- スマートライフ診断：非表示、最後に表示 -->
     <section class="h-10 text-center mt-20 mb-20">
+
     <?php echo "<h1 class='text-2xl font-extrabold ' id='point'>{$username}さんの <br> スマートライフレベルは： <br> レベル{$level}です。</h1>"; ?>
+
     </section>
 
     
@@ -137,7 +148,9 @@ try {
      <!-- footer -->
     <footer class="text-center">
         <div class="mt-20">
+
             <img src="img/fukuoka3.png" alt="" class="inline">
+
         </div>
         <p class="text-xs">©️2023 CROSSHERT All Rights Reserved. </p>
     </footer>

@@ -1,9 +1,11 @@
 <?php
 session_start();
 
-$dbn ='mysql:dbname=crossheart_sllevdb;charset=utf8mb4;port=3306;host=mysql1301b.xserver.jp';
-$user = 'crossheart_2dast';  //毎回同じ  サーバー使う時はサーバー側から指示あり
-$pwd = 'smartlife2525'; //毎回同じ
+
+$dbn ='mysql:dbname=sllev_db;charset=utf8mb4;port=3306;host=localhost';
+$user = 'root';
+$pwd = '';
+
 
 try {
     $pdo = new PDO($dbn, $user, $pwd);
@@ -60,12 +62,14 @@ try {
      </div>
     
     <script>
+
         const labels = <?php echo json_encode($labels); ?>;
         const scores = <?php echo json_encode($scores); ?>;
         console.log(scores);
 
     // チャートのデータ指定
         const data = {
+
         labels: labels, // PHPから受け取ったラベルを利用
         datasets: [{
             label: 'スコア',
@@ -99,6 +103,7 @@ try {
                 }
             }
         }
+
     );
     </script>
     
@@ -127,18 +132,22 @@ try {
     <!-- modalFour -->
 
     <!--要件：SNSボタン -->
+
         <div class="flex justify-center h-20 m-10" >
                 <a class="object-contain" href="http://www.facebook.com/share.php?u=https://sub.life-money-tech.com/index.html" rel="nofollow noopener" target="_blank">
                     <img class="w-8 h-8 m-2" src="img/fb-black.png" alt=""></a>
                 <a class="object-contain" href="https://twitter.com/share?url=https://sub.life-money-tech.com/index.html" rel="nofollow noopener" target="_blank">
                     <img class="w-8 h-8 m-2" src="img/twitter-black.png" alt=""></a>
                 <a class="object-contain" href="http://line.me/R/msg/text/?https://sub.life-money-tech.com/index.html%0aスマートライフ診断を試してみて下さい!" target="_blank"
+
                     rel="nofollow noopener">
                     <img class="w-8 h-8 m-2" src="img/LINE-black.png" alt=""></a>
         </div>
 
         <div class="flex justify-center items-center bg-emerald-100  hover:bg-yellow-500 m-4 h-8 w-1/6 rounded-full">
+
                 <a href="https://sub.life-money-tech.com/" >TOPに戻る</a>
+
         </div>
     
         <p class="text-xs">©️2023 CROSSHERT All Rights Reserved. </p>
